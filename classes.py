@@ -74,7 +74,7 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.play_card = Card()
-        self.count_player = 0
+        self.count_player = 0 # счетчик зачеркнутых номеров на карточке игрока
 
     def new_card(self):
         self.play_card.create_card()

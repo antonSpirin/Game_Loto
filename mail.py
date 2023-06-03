@@ -40,7 +40,6 @@ for i in players: i.view_card()
 # старт игры
 print('For get barrel press Enter or exit game press any key.. ')
 start = input("Press Enter to continue...")
-# count_players = []
 
 
 while start == '':

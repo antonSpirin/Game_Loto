@@ -24,9 +24,18 @@ class TestBarrel:
         barrel.get_number()
         assert barrel.left_barrels == 90 - 1
 
+    def test_count_barrels(self):
+        barrel = Barrel()
+        barrel.get_number()
+        assert barrel.count_barrel == 1
+
 
 class TestPlayer:
     def test_name_player(self):
         player = Player('Anton')
         assert player.name == 'Anton'
-    def test_
+
+    def test_player_card(self):
+        player = Player('Anton')
+        player.new_card()
+        assert len(player.play_card.card_create) == 15
