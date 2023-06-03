@@ -7,27 +7,28 @@ import random
 
 class Card:
     def __init__(self):
-        self.card_numbers = []
+        self.card_numbers = []  # готовая карточка игрока с пробелами
+        self.card_create = []  # список рандомных чисел для форморования картошки игрока
 
     def create_card(self):
         numbers_list = list(range(1, 91))
-        card_create = list(random.sample(numbers_list, 15))
+        self.card_create = list(random.sample(numbers_list, 15))
         # print(card_create)
         card_str1 = []
         card_str2 = []
         card_str3 = []
         numbers_random_list = []
-        for i in range(len(card_create)):
+        for i in range(len(self.card_create)):
             if i >= 0 and i < 5:
-                card_str1.append(card_create[i])
+                card_str1.append(self.card_create[i])
                 if i < 4:
                     card_str1.append(' ')
             if i >= 5 and i < 10:
-                card_str2.append(card_create[i])
+                card_str2.append(self.card_create[i])
                 if i < 9:
                     card_str2.append(' ')
             if i >= 10:
-                card_str3.append(card_create[i])
+                card_str3.append(self.card_create[i])
                 if i < 14:
                     card_str3.append(' ')
         random.shuffle(card_str1)
@@ -49,20 +50,23 @@ class Barrel:
     def __init__(self):
         self.number_barrel = 0
         self.barrels_list = []
-        self.count_barrel = 0
+        self.count_barrel = 0  # счетчик показывает сколько боченков мы взяли
+        self.left_barrels = 90
 
     def get_number(self):
         random_number = 0
         while random_number not in self.barrels_list:
-            random_number = random.randint(1, 91)
+            random_number = random.randint(1, 90)
             if random_number not in self.barrels_list:
                 self.barrels_list.append(random_number)
                 self.number_barrel = random_number
             else:
                 random_number = 0
+        self.count_barrel += 1
+        self.left_barrels -= 1
 
     def view_barrel(self):
-        print(f'New barrel number: {self.barrels_list[self.count_barrel]} (left: {89 - self.count_barrel})')
+        print(f'New barrel number: {self.number_barrel} (left: {self.left_barrels})')
 
 
 class Player:
@@ -70,7 +74,7 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.play_card = Card()
-        self.count_player = 0
+        self.count_player = 0 # счетчик зачеркнутых номеров на карточке игрока
 
     def new_card(self):
         self.play_card.create_card()
@@ -91,5 +95,3 @@ class MyExeption(Exception):
 
     def __str__(self):
         return repr(self.data)
-
-

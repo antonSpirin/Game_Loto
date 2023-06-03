@@ -40,8 +40,7 @@ for i in players: i.view_card()
 # старт игры
 print('For get barrel press Enter or exit game press any key.. ')
 start = input("Press Enter to continue...")
-# count_players = []
-barrels.count_barrel = 0
+
 
 while start == '':
     start = 0
@@ -115,7 +114,7 @@ while start == '':
         print('For get barrel press Enter or exit game press any key.. ')
         start = input("Press Enter to continue...")
 
-    barrels.count_barrel += 1  # счетчик боченков
+
 
 
 
