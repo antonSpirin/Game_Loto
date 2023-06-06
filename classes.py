@@ -3,6 +3,7 @@
 # расположенных по возрастанию. Все цифры в карточке уникальны.
 # Игрок - В игре 2 игрока: пользователь и компьютер. Каждому в начале выдается случайная карточка.
 import random
+import math
 
 
 class Card:
@@ -38,12 +39,20 @@ class Card:
         numbers_random_list.append(card_str2)
         numbers_random_list.append(card_str3)
         self.card_numbers = numbers_random_list
-
     def card_print(self):
         print('-' * 23)
         for i in self.card_numbers:
             print(*i)
         print('-' * 23)
+
+    def __str__(self):
+        return f'Список чисел для формирования карточки игрока: {self.card_create}'
+
+    def __eq__(self, other):
+        return len(self.card_numbers) == len(other.card_numbers)
+
+    def __ne__(self, other):
+        return self.card_numbers != other.card_numbers
 
 
 class Barrel:
@@ -68,13 +77,24 @@ class Barrel:
     def view_barrel(self):
         print(f'New barrel number: {self.number_barrel} (left: {self.left_barrels})')
 
+    def __str__(self):
+        return (f'New barrel number: {self.number_barrel} (left: {self.left_barrels})')
+
+    def __eq__(self, other):
+        return len(self.barrels_list) == len(other.barrels_list)
+
+    def __ne__(self, other):
+        return self.number_barrel != other.number_barrel
+
+    def __call__(self, *args, **kwargs):
+        return self.number_barrel
+
 
 class Player:
-
     def __init__(self, name):
         self.name = name
         self.play_card = Card()
-        self.count_player = 0 # счетчик зачеркнутых номеров на карточке игрока
+        self.count_player = 0  # счетчик зачеркнутых номеров на карточке игрока
 
     def new_card(self):
         self.play_card.create_card()
@@ -88,6 +108,19 @@ class Player:
         print(f'Congratulation, {self.name}!You win!')
         print('-' * 23)
 
+    def __str__(self):
+        return f'Name player: {self.name} {self.play_card.card_print()}'
+
+    def __eq__(self, other):
+        return self.play_card == other.play_card  # так будет работать, потому что это обьект класса Card и тем уже определен метод сравнения
+
+    def __ne__(self, other):
+        return self.name != other.name
+
+
+
+
+
 
 class MyExeption(Exception):
     def __init__(self, data):
@@ -95,3 +128,7 @@ class MyExeption(Exception):
 
     def __str__(self):
         return repr(self.data)
+
+
+if __name__ == '__main__':
+    pass
