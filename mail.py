@@ -41,7 +41,6 @@ for i in players: i.view_card()
 print('For get barrel press Enter or exit game press any key.. ')
 start = input("Press Enter to continue...")
 
-
 while start == '':
     start = 0
     flag_count_players = False
@@ -49,14 +48,14 @@ while start == '':
     barrels.get_number()
 
     for player in players[::-1]:
-        barrels.view_barrel()
+        print(barrels)
         player.view_card()
         # ищем номер боченка на карточке компьютера
         if player.name == 'Computer':
             for i in player.play_card.card_numbers:
                 for x in range(len(i)):
-                    if barrels.number_barrel == i[x]:
-                        i[x] = '\u0336'.join(str(barrels.number_barrel)) + '\u0336'
+                    if barrels() == i[x]:
+                        i[x] = '\u0336'.join(str(barrels())) + '\u0336'
                         player.count_player += 1
                         print('Result after move:')
                         player.view_card()
@@ -75,8 +74,8 @@ while start == '':
                         flag = False  # флаг показывает совпал номер боченка или нет
                         for i in player.play_card.card_numbers:
                             for x in range(len(i)):
-                                if barrels.number_barrel == i[x]:
-                                    i[x] = '\u0336'.join(str(barrels.number_barrel)) + '\u0336'
+                                if barrels() == i[x]:
+                                    i[x] = '\u0336'.join(str(barrels())) + '\u0336'
                                     player.count_player += 1
                                     print('Result after move:')
                                     player.view_card()
@@ -93,8 +92,8 @@ while start == '':
                     elif choice_step == 'n':
                         for i in player.play_card.card_numbers:
                             for x in range(len(i)):
-                                if barrels.number_barrel == i[x]:
-                                    i[x] = '\u0336'.join(str(barrels.number_barrel)) + '\u0336'
+                                if barrels() == i[x]:
+                                    i[x] = '\u0336'.join(str(barrels())) + '\u0336'
                                     print('-' * 23)
                                     print(f'{player.name} Game over!\n''There is such number on your card')
                                     print('-' * 23)
@@ -113,14 +112,3 @@ while start == '':
     if not flag_count_players:  # пока не зачеркнуты все номера на одной из карточек игрока или компьютера
         print('For get barrel press Enter or exit game press any key.. ')
         start = input("Press Enter to continue...")
-
-
-
-
-
-
-
-
-
-
-
